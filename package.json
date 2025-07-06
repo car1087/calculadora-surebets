@@ -1,0 +1,30 @@
+{
+  "name": "calculadora-surebets",
+  "version": "1.0.0",
+  "description": "Calculadora de Surebets para apuestas deportivas",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server",
+    "deploy": "gh-pages -d ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/username/calculadora-surebets.git"
+  },
+  "keywords": [
+    "surebets",
+    "apuestas",
+    "calculadora",
+    "deportes"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/username/calculadora-surebets/issues"
+  },
+  "homepage": "https://github.com/username/calculadora-surebets",
+  "devDependencies": {
+    "gh-pages": "^5.0.0",
+    "live-server": "^1.2.2"
+  }
+}

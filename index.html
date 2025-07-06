@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Surebets (USD/EUR)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="calculator-container">
+        <h1>Calculadora de Surebets</h1>
+        <p class="subtitle">Dólares (USD) vs. Euros (EUR)</p>
+
+        <div class="exchange-rate-section">
+            <h2>Paso 1: Configurar el Tipo de Cambio</h2>
+            <div class="input-group">
+                <label for="exchangeRate">1 Dólar (USD) =</label>
+                <input type="number" id="exchangeRate" step="0.0001" placeholder="Ej: 0.92">
+                <label>Euros (EUR)</label>
+            </div>
+        </div>
+
+        <div class="betting-section">
+            <h2>Paso 2: Ingresar Datos de Apuesta</h2>
+            <div class="bet-house">
+                <h3>Pinacle (cuota)</h3>
+                <div class="input-group">
+                    <label for="odds1">Cuota:</label>
+                    <input type="number" id="odds1" step="0.01" placeholder="Ej: 2.10">
+                </div>
+                <div class="input-group">
+                    <label for="stake1">VALOR APOSTAR PINNACLE (USD):</label>
+                    <input type="number" id="stake1" step="1" placeholder="Ej: 100">
+                </div>
+            </div>
+
+            <div class="bet-house">
+                <h3>winamax (cuota)</h3>
+                <div class="input-group">
+                    <label for="odds2">Cuota:</label>
+                    <input type="number" id="odds2" step="0.01" placeholder="Ej: 2.05">
+                </div>
+            </div>
+        </div>
+
+        <button id="calculateBtn">Calcular Apuesta</button>
+
+        <div class="results-section">
+            <h2>Paso 3: Resultados</h2>
+            <div id="results" class="hidden">
+                <p>Para asegurar la ganancia, debes apostar en winamax:</p>
+                <div class="result-value" id="stake2Result">--.-- EUR</div>
+                
+                <hr>
+
+                <h3>Resumen de la Operación</h3>
+                <p><strong>Inversión Total:</strong> <span id="totalInvestment">--.--</span> (en USD)</p>
+                <p><strong>Ganancia Neta Garantizada:</strong> <span id="profit">--.--</span> (en USD)</p>
+                <p><strong>Retorno sobre la Inversión (ROI):</strong> <span id="roi">--.-- %</span></p>
+            </div>
+            <p id="error-message" class="error"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

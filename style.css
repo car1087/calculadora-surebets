@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.calculator-container {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+h1 {
+    color: #1a237e;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #555;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+h2 {
+    color: #3f51b5;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-weight: 500;
+    color: #444;
+}
+
+input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    width: 100px;
+    text-align: center;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="number"]:focus {
+    border-color: #3f51b5;
+    box-shadow: 0 0 5px rgba(63, 81, 181, 0.3);
+    outline: none;
+}
+
+.betting-section {
+    display: flex;
+    gap: 30px;
+    justify-content: space-around;
+}
+
+.bet-house {
+    flex: 1;
+}
+
+.bet-house h3 {
+    color: #1a237e;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.results-section {
+    margin-top: 20px;
+    text-align: left;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.results-section.hidden, #error-message:empty {
+    display: none;
+}
+
+.result-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: #2fd32f; /* Rojo */
+    text-align: center;
+    margin: 10px 0;
+}
+
+.results-section h3 {
+    text-align: center;
+    color: #3f51b5;
+}
+
+.results-section p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.results-section span {
+    font-weight: bold;
+    color: #2e7d32; /* Verde oscuro */
+}
+
+.error {
+    color: #09e214;
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .betting-section {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .calculator-container {
+        padding: 20px;
+    }
+}
