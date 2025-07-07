@@ -48,19 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 3. Calcular la apuesta para la Casa 2 (en Euros)
-        // El objetivo es que el beneficio sea el mismo en ambos resultados.
-        // Payout1 (USD) = stake1 * odds1
-        // Payout2 (EUR) = stake2 * odds2
-        // Para igualarlos, convertimos el Payout1 a EUR: Payout1 (EUR) = (stake1 * odds1) / exchangeRate
-        // Entonces: (stake1 * odds1) / exchangeRate = stake2 * odds2
+        // 3. Calcular la apuesta para Winamax (en Euros)
+        // Payout Pinacle (USD) = stake1 * odds2
+        // Payout Winamax (EUR) = stake2 * odds1
+        // Para igualar los payouts, convertimos el payout de Winamax a USD:
+        // stake1 * odds2 = (stake2 * odds1) * exchangeRate
         // Despejando stake2:
-        const stake2 = (stake1 * odds1) / (odds2 * exchangeRate);
+        const stake2 = (stake1 * odds2) / (odds1 * exchangeRate);
 
         // 4. Calcular el resumen de la operación (todo en USD)
-        const stake2InUSD = stake2 * exchangeRate;
-        const totalInvestment = stake1 + stake2InUSD;
-        const potentialPayout = stake1 * odds1; // El pago es el mismo en ambos resultados (en USD)
+        const totalInvestment = stake1 + stake2 * exchangeRate;
+        const potentialPayout = stake1 * odds2; // El pago es el mismo en ambos resultados (en USD)
         const netProfit = potentialPayout - totalInvestment;
         const roi = (netProfit / totalInvestment) * 100;
 

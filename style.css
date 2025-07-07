@@ -82,8 +82,9 @@ input[type="number"]:focus {
 }
 
 .bet-house h3 {
-    color: #1a237e;
-    margin-bottom: 15px;
+    color: #007bff;
+    margin-bottom: 1rem;
+    font-weight: bold;
 }
 
 button {
