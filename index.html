@@ -4,15 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Surebets (USD/EUR)</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .calculator-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        label {
+            min-width: 100px;
+        }
+        input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 150px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .results-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        #calculations p {
+            margin: 15px 0;
+            font-size: 16px;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #2196F3;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -32,22 +88,22 @@
         <div class="betting-section">
             <h2>Paso 2: Ingresar Datos de Apuesta</h2>
             <div class="bet-house">
-                <h3>Winamax</h3>
+                <h3>Pinacle</h3>
                 <div class="input-group">
-                    <label for="odds1">Cuota:</label>
-                    <input type="number" id="odds1" step="0.01" placeholder="Ej: 2.10">
+                    <label for="odds2">Cuota:</label>
+                    <input type="number" id="odds2" step="0.01" placeholder="Ej: 1.50">
                 </div>
                 <div class="input-group">
-                    <label for="stake1">Pinacle USD:</label>
+                    <label for="stake1">Stake:</label>
                     <input type="number" id="stake1" step="1" placeholder="Ej: 100">
                 </div>
             </div>
 
             <div class="bet-house">
-                <h3>Pinacle</h3>
+                <h3>Winamax</h3>
                 <div class="input-group">
-                    <label for="odds2">Cuota:</label>
-                    <input type="number" id="odds2" step="0.01" placeholder="Ej: 2.05">
+                    <label for="odds1">Cuota:</label>
+                    <input type="number" id="odds1" step="0.01" placeholder="Ej: 3.10">
                 </div>
             </div>
         </div>
@@ -55,22 +111,67 @@
         <button id="calculateBtn">Calcular Apuesta</button>
 
         <div class="results-section">
-            <h2>Paso 3: Resultados</h2>
-            <div id="results" class="hidden">
-                <p>Para asegurar la ganancia, debes apostar en winamax:</p>
-                <div class="result-value" id="stake2Result">--.-- EUR</div>
-                
-                <hr>
-
-                <h3>Resumen de la Operación</h3>
-                <p><strong>Inversión Total:</strong> <span id="totalInvestment">--.--</span> (en USD)</p>
-                <p><strong>Ganancia Neta Garantizada:</strong> <span id="profit">--.--</span> (en USD)</p>
-                <p><strong>Retorno sobre la Inversión (ROI):</strong> <span id="roi">--.-- %</span></p>
+            <div id="calculations">
+                <p>Ganancia Pinnacle: <span id="gainUSD"></span></p>
+                <p>Ganancia Winamax: <span id="gainEUR"></span></p>
+                <p>Apuesta Winamax: <span class="highlight" id="stake2Result"></span></p>
             </div>
-            <p id="error-message" class="error"></p>
         </div>
+
+        <p id="error-message" class="error"></p>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Código JavaScript directamente en el HTML para asegurar que se cargue correctamente
+        document.addEventListener('DOMContentLoaded', () => {
+            const calculateBtn = document.getElementById('calculateBtn');
+            const gainUSD = document.getElementById('gainUSD');
+            const gainEUR = document.getElementById('gainEUR');
+            const stake2ResultDiv = document.getElementById('stake2Result');
+            const errorMessageP = document.getElementById('error-message');
+
+            console.log('Botón encontrado:', calculateBtn);
+            console.log('Elementos encontrados:', { gainUSD, gainEUR, stake2ResultDiv, errorMessageP });
+
+            calculateBtn.addEventListener('click', () => {
+                console.log('Botón clickeado');
+                
+                // Obtener valores de los inputs
+                const exchangeRate = parseFloat(document.getElementById('exchangeRate').value);
+                const stake1 = parseFloat(document.getElementById('stake1').value);
+                const odds2 = parseFloat(document.getElementById('odds2').value);
+                const odds1 = parseFloat(document.getElementById('odds1').value);
+
+                // Validar que todos los campos tengan valores
+                if (isNaN(exchangeRate) || isNaN(stake1) || isNaN(odds2) || isNaN(odds1)) {
+                    showError('Por favor, completa todos los campos con números válidos');
+                    return;
+                }
+
+                // Validar que los valores sean positivos
+                if (exchangeRate <= 0 || stake1 <= 0 || odds2 <= 0 || odds1 <= 0) {
+                    showError('Todos los valores deben ser positivos');
+                    return;
+                }
+
+                // 1. Calcular ganancia en Pinnacle
+                const gainInUSD = stake1 * odds2;
+                gainUSD.textContent = `${gainInUSD.toFixed(2)} USD`;
+                
+                // 2. Calcular ganancia en Winamax
+                const gainInEUR = gainInUSD * exchangeRate;
+                gainEUR.textContent = `${gainInEUR.toFixed(2)} EUR`;
+                
+                // 3. Calcular apuesta en Winamax
+                const stake2 = gainInEUR / odds1;
+                stake2ResultDiv.textContent = `${stake2.toFixed(2)} EUR`;
+            });
+
+            function showError(message) {
+                console.log('Error mostrado:', message);
+                errorMessageP.textContent = message;
+            }
+        });
+    </script>
 </body>
 </html>
